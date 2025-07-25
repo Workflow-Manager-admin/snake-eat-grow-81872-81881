@@ -1,0 +1,1 @@
+INSTRUCTIONS: Replace this file with a short retro tone, approx 0.1s length, named snake_eat.wav for sound to function.

@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">snake_game_android_frontend</string>
+    <string name="app_name">Snake Game</string>
+    <string name="game_over">Game Over</string>
+    <string name="score">Score:</string>
+    <string name="restart">Restart</string>
+    <string name="exit">Exit</string>
+    <string name="settings">Settings</string>
+    <string name="sound">Sound</string>
+    <string name="ok">OK</string>
 </resources>
