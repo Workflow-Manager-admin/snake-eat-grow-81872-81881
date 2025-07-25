@@ -188,13 +188,24 @@ public class MainActivity extends AppCompatActivity {
 
     private float dp(int dp) { return getResources().getDisplayMetrics().density * dp; }
 
+    /**
+     * Initialize game sounds. If sound resources are missing (expected .wav files), disables sound gracefully.
+     * Note: To enable game sound, replace 'res/raw/snake_eat.txt' and 'res/raw/snake_game_over.txt' with
+     * valid short .wav files named respectively.
+     */
     private void initSound() {
-        AudioAttributes attrs = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build();
-        soundPool = new SoundPool.Builder().setAudioAttributes(attrs).setMaxStreams(2).build();
-        soundEat = soundPool.load(this, R.raw.snake_eat, 1);
-        soundGameOver = soundPool.load(this, R.raw.snake_game_over, 1);
+        try {
+            AudioAttributes attrs = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool = new SoundPool.Builder().setAudioAttributes(attrs).setMaxStreams(2).build();
+            soundEat = soundPool.load(this, R.raw.snake_eat, 1);
+            soundGameOver = soundPool.load(this, R.raw.snake_game_over, 1);
+        } catch (Exception e) {
+            // Resource missing - disable sound, but don't crash app
+            soundPool = null;
+            isSoundOn = false;
+        }
     }
 
     private void playEat() { if (soundPool!=null) soundPool.play(soundEat,1,1,0,0,1); }
